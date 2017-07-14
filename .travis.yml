@@ -14,6 +14,7 @@ before_install:
     - docker pull ${OS_TYPE}
 
 script:
+    - find -name \*.c -exec sh -c '! grep --color "^ *//" $@' find {} \+ && echo No line comments found...
     - docker run -v $TRAVIS_BUILD_DIR:/source ${OS_TYPE} bash -c "set -e;
         ${INSTALL_REQUIREMENTS};
         cd /source;
